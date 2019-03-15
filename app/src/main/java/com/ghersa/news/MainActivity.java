@@ -8,8 +8,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.owlike.genson.Genson;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,4 +73,40 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void onResum(View vv){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection urlConnect = null;
+                try {
+                    URL url = new URL("https://newsapi.org/v2/top-headlines?country=fr&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
+                    urlConnect = (HttpURLConnection) url.openConnection();
+                    urlConnect.setRequestMethod("GET");
+
+                    InputStream in = new BufferedInputStream(urlConnect.getInputStream());
+                    Scanner scanner = new Scanner(in);
+                    final object obj = new Genson().deserialize(scanner.nextLine(), object.class);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i=0; i<obj.getArticles().size(); i++){
+
+                                Log.i("Exception : "," : "+ obj.getArticles().get(i).toString()  );
+                            }
+                        }
+                    });
+
+
+                    in.close();
+                }catch (Exception e){
+                    Log.i("Exception : ","Cannot fond HTTP "+e);
+                }finally {
+                    if(urlConnect != null) urlConnect.disconnect();
+                }
+            }
+        }).start();
+    }
+
 }

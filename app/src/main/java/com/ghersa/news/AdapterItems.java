@@ -46,7 +46,7 @@ public class AdapterItems extends ArrayAdapter<String> {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
- 
+
                 Log.i("GHERSA","SALUTTTTT " + position + " :: " + getItem(position));
             }
         });
