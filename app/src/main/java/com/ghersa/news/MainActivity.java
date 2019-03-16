@@ -7,16 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.owlike.genson.Genson;
-
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
                                 R.layout.item,
                                 items);
                         lv.setAdapter(adapter);
-//                        for (int i=0; i<articles.getArticles().size(); i++){
-//
-//                            Log.i("Exception : "," : "+ articles.getArticles().get(i).toString()  );
-//                        }
                     }
                 });
             }
