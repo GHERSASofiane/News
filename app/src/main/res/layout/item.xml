@@ -5,42 +5,60 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
-    android:background="#DCDCDC"
-    android:orientation="vertical"
-    android:padding="5dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="20"
-        android:orientation="horizontal">
+        android:padding="5dp"
+        android:background="#DCDCDC"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/Titre"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="19"
-            android:gravity="center"
-            android:text="TextView"
-            android:textAllCaps="false"
-            android:textStyle="italic"
-            android:typeface="serif"
-            app:fontFamily="serif" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/Favori"
+            <TextView
+                android:id="@+id/Titre"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAllCaps="false"
+                android:textStyle="italic"
+                android:typeface="serif"
+                app:fontFamily="serif" />
+
+            <ImageButton
+                android:id="@+id/Favori"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#DCDCDC"
+                app:srcCompat="@android:drawable/btn_star_big_on" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/Image"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#DCDCDC"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_margin="5dp"
+            android:maxHeight="800dp"
+            android:minHeight="100dp"
+            android:padding="0dp" />
+
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/Image"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_launcher_background"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_height="20dp"
+        android:layout_weight="20"
+        android:background="@android:color/background_light"
+        android:orientation="vertical"></LinearLayout>
 
 </LinearLayout>

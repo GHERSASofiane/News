@@ -20,7 +20,9 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
-    final List<String> items = new ArrayList<>();
+    final List<article> items = new ArrayList<>();
+    public object articles = new object();
+    final ConnectAPI connectApi = new ConnectAPI();
     int cont = 0;
 
     @Override
@@ -28,42 +30,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final ListView lv = findViewById(R.id.listView);
+
+         new Thread(new Runnable() {
+            @Override
+            public void run() {
+                articles = connectApi.GetArticleApi();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        items.addAll(articles.getArticles());
+
+                        final ArrayAdapter<article> adapter = new
+
+                                AdapterItems(
+                                MainActivity.this,
+                                R.layout.item,
+                                items);
+                        lv.setAdapter(adapter);
+//                        for (int i=0; i<articles.getArticles().size(); i++){
+//
+//                            Log.i("Exception : "," : "+ articles.getArticles().get(i).toString()  );
+//                        }
+                    }
+                });
+            }
+        }).start();
 
 
 
-            ListView lv = findViewById(R.id.listView);
 
-            items.add("Item 1");
-            items.add("Item 2");
-            items.add("Item 3");
-            items.add("Item 4");
-            items.add("Item 5");
-            items.add("Item 6");
-            items.add("Item 7");
-            items.add("Item 8");
-            items.add("Item 9");
-            items.add("Item 10");
-            items.add("Item 11");
-            items.add("Item 12");
-            items.add("Item 13");
-            items.add("Item 14");
-            items.add("Item 7");
-            items.add("Item 8");
-            items.add("Item 9");
-            items.add("Item 10");
-            items.add("Item 11");
-            items.add("Item 12");
-            items.add("Item 13");
-            items.add("Item 14");
 
-            final ArrayAdapter<String> adapter = new
 
-                    AdapterItems(
-                    this,
-                    R.layout.item,
-                    items);
-
-            lv.setAdapter(adapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,41 +70,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-    }
-
-    public void onResum(View vv){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpURLConnection urlConnect = null;
-                try {
-                    URL url = new URL("https://newsapi.org/v2/top-headlines?country=fr&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
-                    urlConnect = (HttpURLConnection) url.openConnection();
-                    urlConnect.setRequestMethod("GET");
-
-                    InputStream in = new BufferedInputStream(urlConnect.getInputStream());
-                    Scanner scanner = new Scanner(in);
-                    final object obj = new Genson().deserialize(scanner.nextLine(), object.class);
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            for (int i=0; i<obj.getArticles().size(); i++){
-
-                                Log.i("Exception : "," : "+ obj.getArticles().get(i).toString()  );
-                            }
-                        }
-                    });
-
-
-                    in.close();
-                }catch (Exception e){
-                    Log.i("Exception : ","Cannot fond HTTP "+e);
-                }finally {
-                    if(urlConnect != null) urlConnect.disconnect();
-                }
-            }
-        }).start();
     }
 
 }

@@ -20,6 +20,7 @@ public class object {
     public void setTotalResults(int totalResults) {
         this.totalResults = totalResults;
     }
+
     public ArrayList<article> getArticles() {
         return articles;
     }
@@ -27,4 +28,9 @@ public class object {
         this.articles = articles;
     }
 
+    public void object(){
+        this.status = "";
+        this.totalResults = 0;
+        this.articles = new ArrayList<>();
+    }
 }

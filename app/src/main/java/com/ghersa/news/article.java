@@ -3,7 +3,6 @@ package com.ghersa.news;
 public class article {
 
 
-    private source source;
     private String author;
     private String title;
     private String description;
@@ -11,12 +10,8 @@ public class article {
     private String urlToImage;
     private String publishedAt;
     private String content;
-    public source getSource() {
-        return source;
-    }
-    public void setSource(source source) {
-        this.source = source;
-    }
+
+
     public String getAuthor() {
         return author;
     }
@@ -60,8 +55,4 @@ public class article {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return getAuthor()+" : "+getPublishedAt();
-    }
 }
