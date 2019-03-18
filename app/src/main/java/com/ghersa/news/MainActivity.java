@@ -1,5 +1,6 @@
 package com.ghersa.news;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+ 
 
     public void Research(final String key){
         new Thread(new Runnable() {

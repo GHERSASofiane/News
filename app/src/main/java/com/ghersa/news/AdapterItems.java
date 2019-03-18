@@ -1,8 +1,10 @@
 package com.ghersa.news;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,7 +35,7 @@ public class AdapterItems extends ArrayAdapter<article> {
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view;
+        final View view;
         if (convertView == null){
             // Create new view
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -74,7 +76,10 @@ public class AdapterItems extends ArrayAdapter<article> {
             @Override
             public void onClick(View v) {
 
-                Log.i("GHERSA","SALUTTTTT " + position + " :: " + getItem(position).getUrlToImage());
+                Uri uri = Uri.parse(getItem(position).getUrl());
+                Intent intent = new Intent( Intent.ACTION_VIEW, uri );
+                getContext().startActivity(intent);
+
             }
         });
 
