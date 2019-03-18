@@ -6,6 +6,18 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/Research"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@android:drawable/ic_menu_search"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:linksClickable="false"
+        android:longClickable="false"
+        android:focusable="false"
+        android:drawableRight="@android:drawable/ic_menu_search" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -30,18 +42,19 @@
 
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/test"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:onClick="test"
+            android:text="test" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_Research"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Research" />
     </LinearLayout>
 
 
