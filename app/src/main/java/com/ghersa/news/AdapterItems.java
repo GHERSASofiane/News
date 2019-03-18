@@ -78,7 +78,6 @@ public class AdapterItems extends ArrayAdapter<article> {
             }
         });
 
-
         return view;
 
     }

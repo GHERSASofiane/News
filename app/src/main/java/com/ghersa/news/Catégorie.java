@@ -20,4 +20,5 @@ public class Catégorie {
         return this.MyCatégorie;
     }
 
+
 }

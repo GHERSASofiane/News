@@ -33,4 +33,5 @@ public class object {
         this.totalResults = 0;
         this.articles = new ArrayList<>();
     }
+
 }

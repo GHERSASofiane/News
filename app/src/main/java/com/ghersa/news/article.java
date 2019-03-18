@@ -11,7 +11,6 @@ public class article {
     private String publishedAt;
     private String content;
 
-
     public String getAuthor() {
         return author;
     }

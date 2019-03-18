@@ -2,9 +2,7 @@ package com.ghersa.news;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -32,17 +30,16 @@ public class MainActivity extends AppCompatActivity {
         button_Research = findViewById(R.id.button_Research);
 
 
-        init();
-
+        init("country","fr");// Init la recherche
+//      a chaque clique dans la barre de recherche on met a jour notre fil d'actuelité
         button_Research.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String tmp = Research.getText().toString();
                 Research(tmp);
-
             }
         });
+
     }
 
     public void Research(final String key){
@@ -67,33 +64,11 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    public void test(View view){
+    private void init(final String key, final String value){
         new Thread(new Runnable() {
             @Override
             public void run() {
-                articles = connectApi.GetApi("Country","fr");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        items.clear();
-                        items.addAll(articles.getArticles());
-                        ArrayAdapter<article> adapter = new
-                                AdapterItems(
-                                MainActivity.this,
-                                R.layout.item,
-                                items);
-                        listView.setAdapter(adapter);
-                    }
-                });
-            }
-        }).start();
-    }
-
-    private void init(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                articles = connectApi.GetArticleApi();
+                articles = connectApi.GetApi(key,value);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
