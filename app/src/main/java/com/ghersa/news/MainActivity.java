@@ -1,6 +1,6 @@
 package com.ghersa.news;
 
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,9 +14,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    final List<article> items = new ArrayList<>();
-    private object articles = new object();
-    final ConnectAPI connectApi = new ConnectAPI();
+    private List<article> items = new ArrayList<>();
+    private ConnectAPI connectApi = new ConnectAPI();
     private ListView listView;
     private TextView Research;
     private Button button_Research;
@@ -30,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Research = findViewById(R.id.Research);
         button_Research = findViewById(R.id.button_Research);
 
-
-        init("country","fr");// Init la recherche
+         init("country","fr");// Init la recherche
 //      a chaque clique dans la barre de recherche on met a jour notre fil d'actuelité
         button_Research.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,50 +40,48 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
- 
+
 
     public void Research(final String key){
-        new Thread(new Runnable() {
+        new AsyncTask<Void,Void,object>(){
             @Override
-            public void run() {
-                articles = connectApi.GetKeywordsApi(key);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        items.clear();
-                        items.addAll(articles.getArticles());
-                        ArrayAdapter<article> adapter = new
-                                AdapterItems(
-                                MainActivity.this,
-                                R.layout.item,
-                                items);
-                        listView.setAdapter(adapter);
-                    }
-                });
+            protected object doInBackground(Void... voids) {
+                return connectApi.GetKeywordsApi(key);
             }
-        }).start();
+
+            @Override
+            protected void onPostExecute(object object) {
+                items.clear();
+                setArticles(object.getArticles());
+            }
+        }.execute();
+
     }
 
     private void init(final String key, final String value){
-        new Thread(new Runnable() {
+        new AsyncTask<Void,Void,object>(){
             @Override
-            public void run() {
-                articles = connectApi.GetApi(key,value);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        items.clear();
-                        items.addAll(articles.getArticles());
-                        ArrayAdapter<article> adapter = new
-                                AdapterItems(
-                                MainActivity.this,
-                                R.layout.item,
-                                items);
-                        listView.setAdapter(adapter);
-                    }
-                });
+            protected object doInBackground(Void... voids) {
+                return connectApi.GetApi(key,value);
             }
-        }).start();
+
+            @Override
+            protected void onPostExecute(object object) {
+                setArticles(object.getArticles());
+            }
+        }.execute();
+
     }
+
+    private void setArticles(List<article> articles){
+        items.addAll(articles);
+        ArrayAdapter<article> adapter = new
+                AdapterItems(
+                MainActivity.this,
+                R.layout.item,
+                items);
+        listView.setAdapter(adapter);
+    }
+
 
 }

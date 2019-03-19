@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,23 +55,11 @@ public class AdapterItems extends ArrayAdapter<article> {
 
         titleView.setText(item);
         // add image to ImageView
+
         try {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-
-            URL url = new URL(img);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.connect();
-            int resCode = httpConn.getResponseCode();
-
-            if (resCode == HttpURLConnection.HTTP_OK) {
-                InputStream in = httpConn.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(in);
-
-                this.imageView.setImageBitmap(bitmap);
-            }
+            Glide.with(view).load(img).into(imageView);
         }catch (Exception e){
-            Log.i("DEBUGE ", ""+e );
+
         }
 
         imageButton.setOnClickListener(new View.OnClickListener() {

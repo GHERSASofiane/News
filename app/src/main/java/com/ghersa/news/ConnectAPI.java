@@ -40,7 +40,13 @@ public class ConnectAPI {
         object result = new object();
         HttpURLConnection urlConnect = null;
         try {
-            URL url = new URL("https://newsapi.org/v2/everything?q="+Keywords+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
+            URL url = new URL("https://newsapi.org/v2/everything?q="+Keywords+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=Context context = this;\n" +
+                    "SharedPreferences pref =\n" +
+                    "this.getPreferences(Context.MODE_PRIVATE);\n" +
+                    "SharedPreferences sharedPref =\n" +
+                    "context.getSharedPreferences(\n" +
+                    " getString(R.string.pref_name),\n" +
+                    "Context.MODE_PRIVATE);");
             urlConnect = (HttpURLConnection) url.openConnection();
             urlConnect.setRequestMethod("GET");
 
