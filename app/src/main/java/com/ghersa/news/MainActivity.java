@@ -26,7 +26,8 @@ import java.util.TreeSet;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
-
+    public final static String EXTRA_MESSAGE =
+            "com.ltm.ltmactionbar.MESSAGE";
     private List<article> items = new ArrayList<>();
     private ConnectAPI connectApi = new ConnectAPI();
     private ListView listView;

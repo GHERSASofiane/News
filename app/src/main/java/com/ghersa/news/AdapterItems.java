@@ -22,7 +22,9 @@ import com.bumptech.glide.Glide;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class AdapterItems extends ArrayAdapter<article> {
     private final int layout;
@@ -72,6 +74,54 @@ public class AdapterItems extends ArrayAdapter<article> {
                 Uri uri = Uri.parse(getItem(position).getUrl());
                 Intent intent = new Intent( Intent.ACTION_VIEW, uri );
                 getContext().startActivity(intent);
+            }
+        });
+
+        btn_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article art = getItem(position);
+                ArrayList<String> parm = new ArrayList<>();
+
+                if(art.getAuthor()==null)
+                    parm.add("null");
+                else if(art.getAuthor().equals(""))
+                    parm.add("null");
+                else
+                    parm.add(art.getAuthor());
+//
+                if(art.getTitle()==null)
+                    parm.add("null");
+                else if(art.getTitle().equals(""))
+                    parm.add("null");
+                else
+                    parm.add(art.getTitle());
+//
+                if(art.getUrl()==null)
+                    parm.add("null");
+                else if(art.getUrl().equals(""))
+                    parm.add("null");
+                else
+                    parm.add(art.getUrl());
+//
+                if(art.getPublishedAt()==null)
+                    parm.add("null");
+                else if(art.getPublishedAt().equals(""))
+                    parm.add("null");
+                else
+                    parm.add(art.getPublishedAt());
+//
+                if(art.getContent()==null)
+                    parm.add("null");
+                else if(art.getContent().equals(""))
+                    parm.add("null");
+                else
+                    parm.add(art.getContent());
+
+
+                Intent i1 = new Intent( view.getContext() , ViewArticle.class);
+                i1.putStringArrayListExtra(MainActivity.EXTRA_MESSAGE,parm);
+                view.getContext().startActivity(i1);
             }
         });
 
