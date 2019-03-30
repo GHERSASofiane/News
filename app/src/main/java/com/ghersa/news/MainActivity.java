@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private ConnectAPI connectApi = new ConnectAPI();
     private ListView listView;
     private TextView research;
-    private Button button_Research;
 
     //    Mes Pref
     private String user_name = "New User";
@@ -51,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         research = findViewById(R.id.research);
-
-        button_Research = findViewById(R.id.test);
 
 
         init();
@@ -98,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         test_1_Connect();
         if(tmppref_Country!=pref_Country || tmppref_Langue!=pref_Langue || tmpprefs_Categorys!=prefs_Categorys){
             getArticles();
-            Log.i("DEBUGE", "Refreche : " );
         }
     }
 
@@ -136,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    public void clickSett(View view) {
+    public void openSettings(View view) {
         OpenSettings();
     }
 
@@ -156,11 +152,6 @@ public class MainActivity extends AppCompatActivity {
             pref_Country = sharedPreferences.getString("pref_Country", "fr");
             prefs_Categorys =  sharedPreferences.getStringSet("prefs_Categorys", new HashSet<String>());
         }
-
-        Log.i("DEBUGE", "user_name : " + this.user_name);
-        Log.i("DEBUGE", "pref_Langue : " + this.pref_Langue);
-        Log.i("DEBUGE", "pref_Country : " + this.pref_Country);
-        Log.i("DEBUGE", "prefs_Categorys : " + this.prefs_Categorys);
     }
 
     public void OpenSettings(){
