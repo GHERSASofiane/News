@@ -1,3 +1,61 @@
 <resources>
     <string name="app_name">News</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <string name="pref_header_general">Général</string>
+    <string name="pref_title_Country">Pays</string>
+    <string name="pref_title_Langue">Langue</string>
+    <!-- Langue -->
+    <string-array name="pref_Langue_titles">
+        <item>Français</item>
+        <item>English</item>
+        <item>Arabe</item>
+        <item>Italien</item>
+        <item>Espagnol</item>
+    </string-array>
+    <string-array name="pref_Langue_values">
+        <item>fr</item>
+        <item>en</item>
+        <item>ar</item>
+        <item>it</item>
+        <item>es</item>
+    </string-array>
+    <!-- Country -->
+    <string-array name="pref_Country_titles">
+        <item>France</item>
+        <item>États-Unis</item>
+        <item>Italie</item>
+        <item>Belgique</item>
+    </string-array>
+    <string-array name="pref_Country_values">
+        <item>fr</item>
+        <item>us</item>
+        <item>it</item>
+        <item>be</item>
+    </string-array>
+
+    <string-array name="list_Category_entries">
+        <item>Affaires</item>
+        <item>Divertissement</item>
+        <item>Général</item>
+        <item>Santé</item>
+        <item>Science</item>
+        <item>Sports</item>
+        <item>Technologie</item>
+    </string-array>
+
+    <string-array name="list_Category_values">
+        <item>business</item>
+        <item>entertainment</item>
+        <item>general</item>
+        <item>health</item>
+        <item>science</item>
+        <item>sports</item>
+        <item>technology</item>
+    </string-array>
+
+
+
 </resources>

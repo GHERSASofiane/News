@@ -5,15 +5,19 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:id="@+id/root"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/Research"
+        android:id="@+id/research"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableEnd="@android:drawable/ic_menu_search"
         android:drawableRight="@android:drawable/ic_menu_search"
         android:ems="10"
+        android:imeOptions="actionSearch"
+        android:focusedByDefault="false"
         android:inputType="textAutoCorrect" />
 
     <LinearLayout
@@ -47,11 +51,12 @@
             android:text="test" />
 
         <Button
-            android:id="@+id/button_Research"
+            android:id="@+id/btnSet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Research" />
+            android:onClick="clickSett"
+            android:text="Sett" />
     </LinearLayout>
 
 

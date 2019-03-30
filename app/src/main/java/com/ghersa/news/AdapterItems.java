@@ -26,7 +26,9 @@ import java.util.List;
 
 public class AdapterItems extends ArrayAdapter<article> {
     private final int layout;
-    ImageButton imageButton;
+    ImageButton btn_fav;
+    ImageButton btn_view;
+    ImageButton btn_link;
     ImageView imageView;
 
     public AdapterItems(@NonNull Context context, int resource, @NonNull List<article> objects) {
@@ -50,7 +52,9 @@ public class AdapterItems extends ArrayAdapter<article> {
         String img = getItem(position).getUrlToImage();
         // Recycle view
         TextView titleView = view.findViewById(R.id.Titre);
-        imageButton = view.findViewById(R.id.Favori);
+        btn_link = view.findViewById(R.id.btn_link);
+        btn_view = view.findViewById(R.id.btn_view);
+        btn_fav = view.findViewById(R.id.btn_fav);
         imageView = view.findViewById(R.id.Image);
 
         titleView.setText(item);
@@ -62,14 +66,12 @@ public class AdapterItems extends ArrayAdapter<article> {
 
         }
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        btn_link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Uri uri = Uri.parse(getItem(position).getUrl());
                 Intent intent = new Intent( Intent.ACTION_VIEW, uri );
                 getContext().startActivity(intent);
-
             }
         });
 

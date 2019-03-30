@@ -1,0 +1,38 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <EditTextPreference
+        android:defaultValue="New User"
+        android:key="user_name"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Nom d'utilisateur" />
+
+    <ListPreference
+        android:defaultValue="fr"
+        android:entries="@array/pref_Langue_titles"
+        android:entryValues="@array/pref_Langue_values"
+        android:key="pref_Langue"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_Langue" />
+
+
+    <ListPreference
+        android:defaultValue="fr"
+        android:entries="@array/pref_Country_titles"
+        android:entryValues="@array/pref_Country_values"
+        android:key="pref_Country"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_Country" />
+
+
+    <MultiSelectListPreference
+        android:entries="@array/list_Category_entries"
+        android:entryValues="@array/list_Category_values"
+        android:key="prefs_Categorys"
+        android:title="Catégorie" />
+
+
+</PreferenceScreen>

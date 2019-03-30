@@ -10,37 +10,20 @@ import java.util.Scanner;
 
 public class ConnectAPI {
 
-    public object GetApi(String key, String pass, String cont){
-
-        object result = new object();
-        HttpURLConnection urlConnect = null;
-        try {
-            URL url = new URL("https://newsapi.org/v2/top-headlines?country="+cont+"&"+key+"="+pass+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
-            urlConnect = (HttpURLConnection) url.openConnection();
-            urlConnect.setRequestMethod("GET");
-
-            InputStream in = new BufferedInputStream(urlConnect.getInputStream());
-            Scanner scanner = new Scanner(in);
-            result = new Genson().deserialize(scanner.nextLine(), object.class);
-            in.close();
-
-            return result;
-
-        }catch (Exception e){
-            Log.i("Exception : ","Cannot fond HTTP "+e);
-            return result;
-        }finally {
-            if(urlConnect != null) urlConnect.disconnect();
-            return result;
-        }
+    //  Pour les catégorie
+    public object GetTopHeadlines(String pays){
+        return AppelerAPI("https://newsapi.org/v2/top-headlines?country="+pays+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
+    }
+    //  Pour les catégorie
+    public object Getcategory(String pays, String category){
+        return AppelerAPI("https://newsapi.org/v2/top-headlines?country="+pays+"&category="+category+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
     }
 
-//  récuperer des news par rapport a une clé et une valeur
-    public object Getcountry(String key, String pass){
+    private object AppelerAPI(String requet){
         object result = new object();
         HttpURLConnection urlConnect = null;
         try {
-            URL url = new URL("https://newsapi.org/v2/top-headlines?"+key+"="+pass+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
+            URL url = new URL(requet);
             urlConnect = (HttpURLConnection) url.openConnection();
             urlConnect.setRequestMethod("GET");
 
@@ -65,13 +48,7 @@ public class ConnectAPI {
         object result = new object();
         HttpURLConnection urlConnect = null;
         try {
-            URL url = new URL("https://newsapi.org/v2/everything?q="+Keywords+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=Context context = this;\n" +
-                    "SharedPreferences pref =\n" +
-                    "this.getPreferences(Context.MODE_PRIVATE);\n" +
-                    "SharedPreferences sharedPref =\n" +
-                    "context.getSharedPreferences(\n" +
-                    " getString(R.string.pref_name),\n" +
-                    "Context.MODE_PRIVATE);");
+            URL url = new URL("https://newsapi.org/v2/everything?q="+Keywords+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
             urlConnect = (HttpURLConnection) url.openConnection();
             urlConnect.setRequestMethod("GET");
 
