@@ -6,7 +6,7 @@ public class object {
 
     private String status ;
     private int totalResults;
-    private ArrayList<article> articles;
+    private ArrayList<Article> articles;
 
     public String getStatus() {
         return status;
@@ -21,10 +21,10 @@ public class object {
         this.totalResults = totalResults;
     }
 
-    public ArrayList<article> getArticles() {
+    public ArrayList<Article> getArticles() {
         return articles;
     }
-    public void setArticles(ArrayList<article> articles) {
+    public void setArticles(ArrayList<Article> articles) {
         this.articles = articles;
     }
 
