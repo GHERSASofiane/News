@@ -1,8 +1,8 @@
 package com.ghersa.news;
 
-public class article {
+public class Article {
 
-
+    private int idNews = 0 ;
     private String author = "";
     private String title = "";
     private String description = "";
@@ -11,6 +11,18 @@ public class article {
     private String publishedAt = "";
     private String content = "";
 
+    public Article(int id, String a, String t, String u, String uimg, String p, String c){
+        setidNews(id); setAuthor(a); setTitle(t);
+        setUrl(u); setUrlToImage(uimg); setPublishedAt(p); setContent(c);
+    }
+    public Article(){    }
+
+    public int getidNews() {
+        return idNews;
+    }
+    public void setidNews(int arg) {
+        this.idNews = arg;
+    }
     public String getAuthor() {
         return author;
     }

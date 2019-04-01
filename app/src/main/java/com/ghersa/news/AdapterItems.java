@@ -2,13 +2,9 @@ package com.ghersa.news;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,21 +15,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-public class AdapterItems extends ArrayAdapter<article> {
+public class AdapterItems extends ArrayAdapter<Article> {
     private final int layout;
     ImageButton btn_fav;
     ImageButton btn_view;
     ImageButton btn_link;
     ImageView imageView;
+    private DataBase dataBase ;
 
-    public AdapterItems(@NonNull Context context, int resource, @NonNull List<article> objects) {
+    public AdapterItems(@NonNull Context context, int resource, @NonNull List<Article> objects) {
         super(context, resource, objects);
         layout = resource;
     }
@@ -59,6 +52,10 @@ public class AdapterItems extends ArrayAdapter<article> {
         btn_fav = view.findViewById(R.id.btn_fav);
         imageView = view.findViewById(R.id.Image);
 
+        btn_fav.setBackgroundResource(R.drawable.star);
+        btn_view.setBackgroundResource(R.drawable.views);
+        btn_link.setBackgroundResource(R.drawable.open);
+
         titleView.setText(item);
         // add image to ImageView
 
@@ -77,10 +74,20 @@ public class AdapterItems extends ArrayAdapter<article> {
             }
         });
 
+        btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataBase = new DataBase(view.getContext());
+                dataBase.insertNews(getItem(position));
+                remove(getItem(position));
+                dataBase.close();
+            }
+        });
+
         btn_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                article art = getItem(position);
+                Article art = getItem(position);
                 ArrayList<String> parm = new ArrayList<>();
 
                 if(art.getAuthor()==null)

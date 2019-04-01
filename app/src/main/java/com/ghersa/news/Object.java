@@ -2,7 +2,7 @@ package com.ghersa.news;
 
 import java.util.ArrayList;
 
-public class object {
+public class Object {
 
     private String status ;
     private int totalResults;

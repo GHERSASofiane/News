@@ -59,22 +59,19 @@
             android:id="@+id/btn_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star_big_off" />
+            android:layout_weight="1"  />
 
         <ImageButton
             android:id="@+id/btn_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_view" />
+            android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/btn_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_set_as" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 

@@ -1,15 +1,11 @@
 package com.ghersa.news;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.ArraySet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,13 +18,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE =
             "com.ltm.ltmactionbar.MESSAGE";
-    private List<article> items = new ArrayList<>();
+    private List<Article> items = new ArrayList<>();
     private ConnectAPI connectApi = new ConnectAPI();
     private ListView listView;
     private TextView research;
@@ -52,9 +46,24 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         research = findViewById(R.id.research);
 
+        Button history =  findViewById(R.id.history);
+        Button setings =  findViewById(R.id.setings);
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenHistory();
+            }
+        });
+        setings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenSettings();
+            }
+        });
 
         init();
         getArticles();
+
 
     }
 
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private void getArticles(){
         items.clear();
         researchAPI("","","Top");
-        for(Object object : prefs_Categorys) {
+        for(java.lang.Object object : prefs_Categorys) {
             String element = (String) object;
             researchAPI("",element,"category");
         }
@@ -100,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void researchAPI(final String key, final String value, final String stat){
-        new AsyncTask<Void,Void,object>(){
+        new AsyncTask<Void,Void, Object>(){
             @Override
-            protected object doInBackground(Void... voids) {
+            protected Object doInBackground(Void... voids) {
                 switch (stat){
                     case "Keywords" : items.clear();
                         return connectApi.GetKeywordsApi(value);
@@ -115,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onPostExecute(object object) {
+            protected void onPostExecute(Object object) {
                 if (object!=null)
                     setArticles(object.getArticles());
             }
@@ -123,9 +132,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setArticles(List<article> articles){
+    private void setArticles(List<Article> articles){
         items.addAll(articles);
-        ArrayAdapter<article> adapter = new
+        ArrayAdapter<Article> adapter = new
                 AdapterItems(
                 MainActivity.this,
                 R.layout.item,
@@ -157,6 +166,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void OpenSettings(){
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void OpenHistory(){
+        Intent intent = new Intent(this, History.class);
         startActivity(intent);
     }
 }

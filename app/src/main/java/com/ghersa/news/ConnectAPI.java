@@ -11,16 +11,16 @@ import java.util.Scanner;
 public class ConnectAPI {
 
     //  Pour les catégorie
-    public object GetTopHeadlines(String pays){
+    public Object GetTopHeadlines(String pays){
         return AppelerAPI("https://newsapi.org/v2/top-headlines?country="+pays+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
     }
     //  Pour les catégorie
-    public object Getcategory(String pays, String category){
+    public Object Getcategory(String pays, String category){
         return AppelerAPI("https://newsapi.org/v2/top-headlines?country="+pays+"&category="+category+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
     }
 
-    private object AppelerAPI(String requet){
-        object result = new object();
+    private Object AppelerAPI(String requet){
+        Object result = new Object();
         HttpURLConnection urlConnect = null;
         try {
             URL url = new URL(requet);
@@ -29,7 +29,7 @@ public class ConnectAPI {
 
             InputStream in = new BufferedInputStream(urlConnect.getInputStream());
             Scanner scanner = new Scanner(in);
-            result = new Genson().deserialize(scanner.nextLine(), object.class);
+            result = new Genson().deserialize(scanner.nextLine(), Object.class);
             in.close();
 
             return result;
@@ -44,8 +44,8 @@ public class ConnectAPI {
     }
 
 //  Récuperer les news par rapport a un mot de recherche
-    public object GetKeywordsApi(String Keywords){
-        object result = new object();
+    public Object GetKeywordsApi(String Keywords){
+        Object result = new Object();
         HttpURLConnection urlConnect = null;
         try {
             URL url = new URL("https://newsapi.org/v2/everything?q="+Keywords+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
@@ -54,7 +54,7 @@ public class ConnectAPI {
 
             InputStream in = new BufferedInputStream(urlConnect.getInputStream());
             Scanner scanner = new Scanner(in);
-            result = new Genson().deserialize(scanner.nextLine(), object.class);
+            result = new Genson().deserialize(scanner.nextLine(), Object.class);
             in.close();
 
             return result;
