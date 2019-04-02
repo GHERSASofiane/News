@@ -1,13 +1,18 @@
 package com.ghersa.news;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private String tmppref_Langue = "fr";
     private String tmppref_Country = "fr";
     private Set<String> tmpprefs_Categorys = new HashSet<>();
+    private boolean isVisibleSerch = false;
 
 
     @Override
@@ -43,23 +49,11 @@ public class MainActivity extends AppCompatActivity {
         test_1_Connect();
         setContentView(R.layout.activity_main);
 
+
+
         listView = findViewById(R.id.listView);
         research = findViewById(R.id.research);
 
-        Button history =  findViewById(R.id.history);
-        Button setings =  findViewById(R.id.setings);
-        history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenHistory();
-            }
-        });
-        setings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenSettings();
-            }
-        });
 
         init();
         getArticles();
@@ -67,15 +61,48 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return  true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.mnfavory :
+                OpenHistory();
+                break;
+            case R.id.mnserch :
+                isVisibleSerch = !isVisibleSerch;
+                if(isVisibleSerch){research.setVisibility(View.VISIBLE);}
+                else {  research.setVisibility(View.GONE);
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(research.getWindowToken(), 0);
+                }
+                break;
+            case R.id.mnsettings :
+                OpenSettings();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void init(){
         research.clearFocus();
+        research.setVisibility(View.GONE);
         research.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 String tmp = v.getText().toString();
                 researchAPI("",tmp,"Keywords");
                 research.clearFocus();
+                isVisibleSerch = !isVisibleSerch;
+                research.setVisibility(View.GONE);
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(research.getWindowToken(), 0);
                 return true;
             }
         });
@@ -142,9 +169,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    public void openSettings(View view) {
-        OpenSettings();
-    }
 
     public void test_1_Connect(){
 //        Tester si la 1 Er connexion

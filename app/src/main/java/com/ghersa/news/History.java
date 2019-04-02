@@ -31,7 +31,7 @@ public class History extends AppCompatActivity {
         ArrayAdapter<Article> adapter = new
                 AdapterItemsHistory(
                 History.this,
-                R.layout.item,
+                R.layout.itemhistry,
                 items);
         listView.setAdapter(adapter);
     }

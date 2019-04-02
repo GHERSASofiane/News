@@ -52,9 +52,6 @@ public class AdapterItemsHistory extends ArrayAdapter<Article> {
         btn_fav = view.findViewById(R.id.btn_fav);
         imageView = view.findViewById(R.id.Image);
 
-        btn_fav.setBackgroundResource(R.drawable.delete);
-        btn_view.setBackgroundResource(R.drawable.views);
-        btn_link.setBackgroundResource(R.drawable.open);
 
         titleView.setText(item);
         // add image to ImageView
