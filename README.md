@@ -6,7 +6,7 @@
 
 Aujourd’hui on à une difficulté de consulter les sources des journaux électronique, a cause de différentes sources.
 J’ai pensé à mettre en oeuvre une application qui facilite la visualisation des articles.
-L’utilisateur configure les paramètres de l’application ( Langue, Pays, Catégorie … ), à partir de cette configuration l’application cherche des articles adéquate dans une API open source “ [Named Link](https://newsapi.org/ "newsapi")newsapi “, on peut aussi faire une recherche, cette application elle permet de sauvegarder ces articles et aller sur le site de la source en un seul click.
+L’utilisateur configure les paramètres de l’application ( Langue, Pays, Catégorie … ), à partir de cette configuration l’application cherche des articles adéquate dans une API open source “ [newsapi](https://newsapi.org/ "")newsapi “, on peut aussi faire une recherche, cette application elle permet de sauvegarder ces articles et aller sur le site de la source en un seul click.
 
  
 ### Activité 
