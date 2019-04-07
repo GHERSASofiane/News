@@ -18,8 +18,8 @@
         android:drawableEnd="@android:drawable/ic_menu_search"
         android:drawableRight="@android:drawable/ic_menu_search"
         android:ems="10"
-        android:imeOptions="actionSearch"
         android:focusedByDefault="false"
+        android:imeOptions="actionSearch"
         android:inputType="textAutoCorrect" />
 
     <LinearLayout

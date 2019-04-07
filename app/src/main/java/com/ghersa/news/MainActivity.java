@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.speech.RecognizerIntent;
+import android.speech.RecognizerResultsIntent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.mnsettings :
                 OpenSettings();
                 break;
+            case R.id.mnrefresh :
+                getArticles();
+                break;
+            case R.id.mnspeech :
+                textToSp();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -106,6 +116,31 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void textToSp(){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, pref_Langue );
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(intent,10);
+        }else{
+            Log.i("Speech","ERROR");
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 10 :
+                if(resultCode == RESULT_OK && data != null){
+                    ArrayList<String> result =  data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    researchAPI("",result.get(0),"Keywords");
+                }
+                break;
+        }
     }
 
     private void getArticles(){
@@ -141,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             protected Object doInBackground(Void... voids) {
                 switch (stat){
                     case "Keywords" : items.clear();
-                        return connectApi.GetKeywordsApi(value);
+                        return connectApi.GetKeywordsApi(pref_Langue,value);
 
                     case "category" :
                         return connectApi.Getcategory(MainActivity.this.pref_Country,value);
@@ -196,5 +231,10 @@ public class MainActivity extends AppCompatActivity {
     public void OpenHistory(){
         Intent intent = new Intent(this, History.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

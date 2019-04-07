@@ -44,11 +44,11 @@ public class ConnectAPI {
     }
 
 //  Récuperer les news par rapport a un mot de recherche
-    public Object GetKeywordsApi(String Keywords){
+    public Object GetKeywordsApi(String lg, String Keywords){
         Object result = new Object();
         HttpURLConnection urlConnect = null;
         try {
-            URL url = new URL("https://newsapi.org/v2/everything?q="+Keywords+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
+            URL url = new URL("https://newsapi.org/v2/everything?language="+lg+"&q="+Keywords+"&apiKey=fb82207d6c214614bc18937bb5e0f4f3&pageSize=100");
             urlConnect = (HttpURLConnection) url.openConnection();
             urlConnect.setRequestMethod("GET");
 

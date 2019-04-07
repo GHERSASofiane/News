@@ -2,15 +2,19 @@ package com.ghersa.news;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,11 +28,15 @@ public class AdapterItems extends ArrayAdapter<Article> {
     ImageButton btn_view;
     ImageButton btn_link;
     ImageView imageView;
+    LinearLayout lytSp;
     private DataBase dataBase ;
+    private Speech speech;
+    private String pref_Langue;
 
     public AdapterItems(@NonNull Context context, int resource, @NonNull List<Article> objects) {
         super(context, resource, objects);
         layout = resource;
+        speech = new Speech(context);
     }
 
     @NonNull
@@ -51,7 +59,11 @@ public class AdapterItems extends ArrayAdapter<Article> {
         btn_view = view.findViewById(R.id.btn_view);
         btn_fav = view.findViewById(R.id.btn_fav);
         imageView = view.findViewById(R.id.Image);
+        lytSp = view.findViewById(R.id.lytSpeech);
 
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        pref_Langue = sharedPreferences.getString("pref_Langue", "fr");
 
         titleView.setText(item);
         // add image to ImageView
@@ -129,9 +141,20 @@ public class AdapterItems extends ArrayAdapter<Article> {
             }
         });
 
+        lytSp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Article art = getItem(position);
+                String res = "Titre "+art.getTitle()+" Description "+art.getDescription();
+
+                speech.speak( res );
+            }
+        });
+
         return view;
 
     }
+
 
 
 }

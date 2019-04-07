@@ -2,6 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:id="@+id/mnspeech"
+        android:icon="@android:drawable/presence_audio_online"
+        android:orderInCategory="100"
+        android:title=" "
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/mnrefresh"
+        android:icon="@android:drawable/stat_notify_sync"
+        android:orderInCategory="100"
+        android:title=" "
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/mnserch"
         android:icon="@android:drawable/ic_search_category_default"
@@ -23,4 +38,5 @@
         android:orderInCategory="100"
         android:title=" "
         app:showAsAction="always" />
+
 </menu>
