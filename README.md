@@ -11,13 +11,13 @@ L’utilisateur configure les paramètres de l’application ( Langue, Pays, Cat
  
 ### Activité 
 
-Paramétrage : cette activité s’ouvre à l'installation de l’application pour connaître les préférences de l’utilisateur, cette activité est aussi accessible à partir d’un bouton dans le menu.
+* Paramétrage : cette activité s’ouvre à l'installation de l’application pour connaître les préférences de l’utilisateur, cette activité est aussi accessible à partir d’un bouton dans le menu.
 
-Principale : Elle nous affiche des articles rechercher sur l’API, ces articles correspond a nos préférences, et on peux faire une recherche sur la barre dédié ou avec la saisie vocale. 
+* Principale : Elle nous affiche des articles rechercher sur l’API, ces articles correspond a nos préférences, et on peux faire une recherche sur la barre dédié ou avec la saisie vocale. 
 
-Détail : J’ai mis cette activité pour consulter la description d’un article et elle permet de consulter le site de source de cette article.
+* Détail : J’ai mis cette activité pour consulter la description d’un article et elle permet de consulter le site de source de cette article.
 
-Historique : Cette activité elle permet de consulter et supprimer des articles déjà enregistrés pour une lecture ultérieure. 
+* Historique : Cette activité elle permet de consulter et supprimer des articles déjà enregistrés pour une lecture ultérieure. 
 
 
 ### Extension
